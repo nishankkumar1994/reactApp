@@ -1,22 +1,70 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
 
-import React from 'react'
 
-import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+class App extends React.Component {
+   render() {
+      return (
+         <div>
+            <ul>
+               <li><Link to={`/home/`}>Home</Link></li>
+               <li><Link to={`/About/`}>About</Link></li>
+               <li><Link to={`/Contact/`}>Contact</Link></li>
+            </ul>
+				
+           {this.props.children}
+         </div>
+      )
+   }
+}
 
-import App from './App.jsx'
-import todoApp from './reducers/reducers'
+export default App;
 
-let store = createStore(todoApp)
+class Home extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>Home...</h1>
+         </div>
+      )
+   }
+}
 
-let rootElement = document.getElementById('app')
+export default Home;
 
-render(
+class About extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>About...</h1>
+         </div>
+      )
+   }
+}
 
-   <Provider store = {store}>
-      <App />
-   </Provider>,
+export default About;
+
+class Contact extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>Contact...</h1>
+         </div>
+      )
+   }
+}
+
+export default Contact;
+
+ReactDOM.render((
+   <Router history = {browserHistory}>
+      <Route path = "/" component = {App}>
+         <IndexRoute component = {Home} />
+         <Route path = "home" component = {Home} />
+         <Route path = "about" component = {About} />
+         <Route path = "contact" component = {Contact} />
+      </Route>
+   </Router>
 	
-   rootElement
-)
+), document.getElementById('app'))
