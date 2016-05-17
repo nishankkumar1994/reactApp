@@ -1,70 +1,89 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
+// import React from 'react'
+// import { render } from 'react-dom'
+// import { Router, Route, Link } from 'react-router'
+// import { IndexRoute } from 'react-router'
 
+// const App = React.createClass({
+//   render() {
+//     return (
+//       <div>
+//         <h1>App</h1>
+//         <ul>
+//           <li><Link to="/about">About</Link></li>
+//           <li><Link to="/inbox">Inbox</Link></li>
+//           <li><Link to="/login">Login</Link></li>
+//         </ul>
+//         {this.props.children}
+//       </div>
+//     )
+//   }
+// })
 
-class App extends React.Component {
-   render() {
-      return (
-         <div>
-            <ul>
-               <li><Link to={`/home/`}>Home</Link></li>
-               <li><Link to={`/About/`}>About</Link></li>
-               <li><Link to={`/Contact/`}>Contact</Link></li>
-            </ul>
-				
-           {this.props.children}
-         </div>
-      )
-   }
-}
+// const About = React.createClass({
+//   render() {
+//     return <h3>About</h3>
+//   }
+// })
 
-export default App;
+// const Inbox = React.createClass({
+//   render() {
+//     return (
+//       <div>
+//         <h2>Inbox</h2>
+//         {this.props.children || "Welcome to your Inbox"}
+//       </div>
+//     )
+//   }
+// })
+// const Login = React.createClass({
+//   render() {
+//     return (
+//       <div>
+//         <h2>Login</h2>
+//         {this.props.children || "Welcome to your Inbox"}
+//       </div>
+//     )
+//   }
+// })
 
-class Home extends React.Component {
-   render() {
-      return (
-         <div>
-            <h1>Home...</h1>
-         </div>
-      )
-   }
-}
+// const Message = React.createClass({
+//   render() {
+//     return <h3>Message {this.props.params.id}</h3>
+//   }
+// })
 
-export default Home;
+// const Dashboard = React.createClass({
+//   render() {
+//     return <div>Welcome to the app!</div>
+//   }
+// })
 
-class About extends React.Component {
-   render() {
-      return (
-         <div>
-            <h1>About...</h1>
-         </div>
-      )
-   }
-}
+// render((
+//   <Router>
+//     <Route path="/" component={App}>
+//       {/* Show the dashboard at / */}
+//       <IndexRoute component={Dashboard} />
+//       <Route path="about" component={About} />
+//       <Route path="login" component={Login} />
+//       <Route path="inbox" component={Inbox}>
+//         <Route path="messages/:id" component={Message} />
+//       </Route>
+//     </Route>
+//   </Router>
+// ),  document.getElementById('app'));
 
-export default About;
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+import App from './components/App'
 
-class Contact extends React.Component {
-   render() {
-      return (
-         <div>
-            <h1>Contact...</h1>
-         </div>
-      )
-   }
-}
+let store = createStore(todoApp)
 
-export default Contact;
-
-ReactDOM.render((
-   <Router history = {browserHistory}>
-      <Route path = "/" component = {App}>
-         <IndexRoute component = {Home} />
-         <Route path = "home" component = {Home} />
-         <Route path = "about" component = {About} />
-         <Route path = "contact" component = {Contact} />
-      </Route>
-   </Router>
-	
-), document.getElementById('app'))
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+)
