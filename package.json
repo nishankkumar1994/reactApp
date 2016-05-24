@@ -231,7 +231,8 @@
     "webpack-dev-server": "~1.14.1",
     "react-router": "~2.4.0",
     "redux": "~3.5.2",
-    "react-redux": "~4.4.5"
+    "react-redux": "~4.4.5",
+    "react-bootstrap": "~0.29.4"
   },
   "devDependencies": {},
   "scripts": {
